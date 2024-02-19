@@ -16,7 +16,7 @@
       <div id="cmds">
       </div>
 
-      <form id="console">
+      <form id="console" action="#">
         <div><em id="prompt">irb(cultome)001&gt</em> <input type="text" id="userInput" autofocus ></div>
       </form>
     </div>
@@ -63,6 +63,8 @@
 
         promptCount += 1;
         setPrompt();
+
+        return false;
       }
 
       function setPrompt() {
