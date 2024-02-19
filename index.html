@@ -8,11 +8,12 @@
     <link href="css/style.css" rel="stylesheet">
   </head>
   <body>
-    <div class="crt-scan-area">
+    <div id="terminal">
       <div>ruby 3.2.2 (2023-03-30 revision e51014f9c0) [x86_64-linux]</div><br><br>
       <div id="cmds"></div>
       <form id="console" action="#">
-        <div><em id="prompt">irb(cultome)001&gt</em> <input type="text" id="userInput" autofocus></div>
+        <div id="prompt">irb(cultome)001&gt</div>
+        <div id="input"><input type="text" id="userInput" autofocus></div>
       </form>
     </div>
   </body>
