@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>csoria@cultome</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@ruby/wasm-wasi@2.5.0/dist/browser.umd.js"></script>
+  </head>
+  <body>
+    <div class="crt-scan-area">
+      <div>ruby 3.2.2 (2023-03-30 revision e51014f9c0) [x86_64-linux]</div>
+      <br>
+      <br>
+
+      <div id="cmds">
+      </div>
+
+      <form id="console">
+        <div><em id="prompt">irb(cultome)001&gt</em> <input type="text" id="userInput" autofocus ></div>
+      </form>
+    </div>
+  </body>
+  <script>
+    var result = "hello";
+
+    (async () => {
+      const { DefaultRubyVM } = window["ruby-wasm-wasi"];
+      const response = await fetch("https://cdn.jsdelivr.net/npm/@ruby/3.3-wasm-wasi@2.5.0/dist/ruby+stdlib.wasm");
+      const module = await WebAssembly.compileStreaming(response);
+      const { vm } = await DefaultRubyVM(module);
+
+      var promptCount = 1;
+
+      function focusInput() {
+        let userInput = document.querySelector("#userInput").focus();
+      }
+
+      function execute() {
+        let userInput = document.querySelector("#userInput").value;
+        document.querySelector("#userInput").value = "";
+
+        vm.eval(`
+          require "js"
+
+          result = "${userInput}".reverse
+          JS.global[:result] = result
+        `);
+        console.log("Response:", result);
+
+        let cmd = document.createElement("div");
+        cmd.innerText = `irb(cultome):${String(promptCount).padStart(3, "0")}> ${userInput}`;
+
+        let res = document.createElement("div");
+        res.innerText = `=> ${result}`;
+        result = '';
+
+        let br = document.createElement("br");
+
+        document.querySelector("#cmds").appendChild(cmd);
+        document.querySelector("#cmds").appendChild(res);
+        document.querySelector("#cmds").appendChild(br);
+
+        promptCount += 1;
+        setPrompt();
+      }
+
+      function setPrompt() {
+        document.querySelector("#prompt").innerText = `irb(cultome)${String(promptCount).padStart(3, "0")}>`;
+      }
+
+      window.addEventListener("click", focusInput);
+      document.querySelector("#console").addEventListener("submit", execute);
+      document.querySelector("#userInput").addEventListener("blur", focusInput);
+
+      document.onload = setPrompt();
+    })();
+  </script>
+</html>

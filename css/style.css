@@ -1,0 +1,53 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	box-shadow: inset 0 0 5px 5px rgba(255, 255, 255, 0.1);
+	background: #141414 radial-gradient(ellipse at center, rgba(255, 176, 0, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+	z-index: -1;
+}
+
+.crt-scan-area {
+	width: 100%;
+	height: 100%;
+	margin: 2em;
+	overflow-y: hidden;
+	font-family: monospace;
+	color: #ffb000;
+	text-shadow: 0 0 1px rgba(255, 176, 0, 0.8);
+}
+
+.crt-scan-area em {
+	color: #141414;
+	background-color: #ffb000;
+	font-style: normal;
+}
+
+form {
+  width: 100%;
+}
+
+input {
+  background-color: transparent;
+  border: none;
+	color: #ffb000;
+  width: 100%;
+}
+
+input:focus-visible {
+  outline: none;
+}
