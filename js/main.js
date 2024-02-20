@@ -27,7 +27,8 @@ var result = "";
     term.scrollTo(0, term.scrollHeight);
   }
 
-  function execute() {
+  function execute(evt) {
+    evt.preventDefault()
     let userInput = document.querySelector("#userInput").value;
     document.querySelector("#userInput").value = "";
 
@@ -65,6 +66,7 @@ var result = "";
     setPrompt();
     focusInput();
 
+    console.log("Executing returning false!")
     return false;
   }
 
